@@ -31,7 +31,18 @@ if($override = get_field('override_title', get_the_ID())) {
 
 ?>
 
-<div class="candidate">				
+<div class="candidate">		
+	<?php 
+	// Get designation terms for this candidate
+	$designations = get_the_terms(get_the_ID(), 'designations');
+	if ($designations && !is_wp_error($designations)) {
+		foreach ($designations as $designation) {
+			?>
+			<span class="designation"><?php echo esc_html($designation->name); ?></span>
+			<?php
+		}
+	}
+	?>		
 	<div class="headshot">
 		<img src="<?php echo $headshot['sizes']['headshot'];?>" alt="<?php echo get_the_title();?>" />
 	</div>
