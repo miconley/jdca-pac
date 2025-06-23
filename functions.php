@@ -32,16 +32,26 @@ require_once(get_template_directory().'/functions/translation/translation.php');
 // require_once(get_template_directory().'/functions/editor-styles.php'); 
 
 // Remove Emoji Support
-// require_once(get_template_directory().'/functions/disable-emoji.php'); 
+require_once(get_template_directory().'/functions/disable-emoji.php'); 
 
 // Related post function - no need to rely on plugins
 // require_once(get_template_directory().'/functions/related-posts.php'); 
 
 // Use this as a template for custom post types
-// require_once(get_template_directory().'/functions/custom-post-type.php');
+require_once(get_template_directory().'/functions/custom-post-type.php');
 
 // Customize the WordPress login menu
 // require_once(get_template_directory().'/functions/login.php'); 
 
 // Customize the WordPress admin
 // require_once(get_template_directory().'/functions/admin.php'); 
+
+add_image_size( 'video_thumb', 600, 340 ); 
+add_image_size( 'headshot', 300, 300 ); 
+add_image_size( 'header_image', 1600); 
+
+add_action('init', 'rem_editor_from_post_type');
+function rem_editor_from_post_type() {
+    remove_post_type_support('candidate', 'editor' );
+    remove_post_type_support('ad', 'editor' );
+}
