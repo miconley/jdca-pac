@@ -36,6 +36,9 @@
 				?>
 				<div class="taxonomy-section" data-taxonomy="<?php echo esc_attr($taxonomy->name); ?>">
 					<h3 class="taxonomy-title"><?php echo esc_html($taxonomy->labels->name); ?></h3>
+					<button class="caret open" aria-label="open/close filter section">
+						<img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow.svg" />
+					</button>
 					<ul class="taxonomy-terms">
 						<?php foreach ($terms as $term) { 
 							// Check if this term is currently selected
@@ -65,8 +68,7 @@
 		?>
 		
 		<div class="filter-actions">
-			<button type="submit" class="button primary" id="apply-filters">Apply Filters</button>
-			<a href="<?php echo esc_url(get_post_type_archive_link('candidate')); ?>" class="button secondary" id="clear-filters">Clear Filters</a>
+			<a href="<?php echo esc_url(get_post_type_archive_link('candidate')); ?>" role="button" class="button secondary" id="clear-filters">Clear Filters</a>
 		</div>
 	</form>
 </aside>

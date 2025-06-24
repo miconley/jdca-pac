@@ -5,7 +5,6 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const filterForm = document.getElementById('candidate-filter-form');
-    const applyButton = document.getElementById('apply-filters');
     const clearButton = document.getElementById('clear-filters');
     const checkboxes = document.querySelectorAll('.term-checkbox');
     
@@ -47,20 +46,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return finalParams.toString();
     }
     
-    // Handle apply filters button
-    if (applyButton) {
-        applyButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const queryString = updateURL();
-            let url = filterForm.action;
-            
-            if (queryString) {
-                url += '?' + queryString;
-            }
-            
-            window.location.href = url;
-        });
+    // Auto-apply filters when checkbox changes
+    function applyFilters() {
+        const queryString = updateURL();
+        let url = filterForm.action;
+        
+        if (queryString) {
+            url += '?' + queryString;
+        }
+        
+        window.location.href = url;
     }
     
     // Handle clear filters button
@@ -78,18 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Add visual feedback for filter state
+    // Update filter state and visual feedback
     function updateFilterState() {
         const checkedBoxes = document.querySelectorAll('.term-checkbox:checked');
         const hasFilters = checkedBoxes.length > 0;
-        
-        // Update button states
-        if (applyButton) {
-            applyButton.disabled = !hasFilters;
-            applyButton.textContent = hasFilters ? 
-                `Apply Filters (${checkedBoxes.length})` : 
-                'Apply Filters';
-        }
         
         // Update clear button state
         if (clearButton) {
@@ -104,25 +91,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Listen for checkbox changes
+    // Listen for checkbox changes and auto-apply filters
     checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', updateFilterState);
+        checkbox.addEventListener('change', function() {
+            updateFilterState();
+            // Auto-apply filters after a short delay to allow for multiple selections
+            setTimeout(applyFilters, 300);
+        });
     });
     
     // Initialize filter state
     updateFilterState();
     
-    // Handle form submission with proper array formatting
+    // Prevent form submission since we auto-apply
     filterForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        const queryString = updateURL();
-        let url = filterForm.action;
-        
-        if (queryString) {
-            url += '?' + queryString;
-        }
-        
-        window.location.href = url;
     });
 });
