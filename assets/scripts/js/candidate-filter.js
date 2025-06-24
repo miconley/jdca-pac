@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const filterForm = document.getElementById('candidate-filter-form');
     const clearButton = document.getElementById('clear-filters');
     const checkboxes = document.querySelectorAll('.term-checkbox');
+    const caretButtons = document.querySelectorAll('.caret');
     
     if (!filterForm) return;
     
@@ -98,6 +99,47 @@ document.addEventListener('DOMContentLoaded', function() {
             // Auto-apply filters after a short delay to allow for multiple selections
             setTimeout(applyFilters, 300);
         });
+    });
+    
+    // Handle expand/collapse functionality for filter sections
+    function toggleSection(caretButton) {
+        const section = caretButton.closest('.taxonomy-section');
+        const termsList = section.querySelector('.taxonomy-terms');
+        const isOpen = caretButton.classList.contains('open');
+        
+        if (isOpen) {
+            // Collapse the section
+            caretButton.classList.remove('open');
+            caretButton.classList.add('closed');
+            section.classList.add('collapsed');
+        } else {
+            // Expand the section
+            caretButton.classList.remove('closed');
+            caretButton.classList.add('open');
+            section.classList.remove('collapsed');
+        }
+    }
+    
+    // Add click event listeners to caret buttons
+    caretButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleSection(this);
+        });
+    });
+    
+    // Initialize all sections as expanded by default
+    caretButtons.forEach(button => {
+        const section = button.closest('.taxonomy-section');
+        const termsList = section.querySelector('.taxonomy-terms');
+        
+        // Ensure sections start expanded
+        if (button.classList.contains('open')) {
+            termsList.style.maxHeight = 'none';
+            termsList.style.overflow = 'visible';
+            section.classList.remove('collapsed');
+        }
     });
     
     // Initialize filter state
