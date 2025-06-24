@@ -1,0 +1,74 @@
+// Font-face mixin for easier font loading
+@mixin font-face($name, $path, $weight: normal, $style: normal, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+	
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype"
+	);
+	
+	@each $ext in $exts {
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		
+		@if $ext == eot {
+			$src: append($src, url(quote($path + "." + $ext + "?")) format(quote($format)), comma);
+		} @else {
+			$src: append($src, url(quote($path + "." + $ext)) format(quote($format)), comma);
+		}
+	}
+	
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+// Google Fonts - Heebo (loaded via header)
+// Define font variables for easy use throughout the project
+$font-primary: 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+$font-secondary: 'Samplino', serif;
+
+// Apply Heebo as the default font
+body {
+	font-family: $font-primary;
+}
+
+// Headings can use Heebo with different weights
+h1, h2, h3, h4, h5, h6 {
+	font-family: $font-primary;
+	font-weight: 600; // Heebo SemiBold
+	color: $dark-blue;
+
+	&.center {
+		display: block;
+		width: 100%;
+		text-align: center;
+		position: relative;
+		margin: 20px 0;
+	}
+
+	&.accent {
+		&::before {
+			content: '';
+			position: absolute;
+			display: block;
+			top: -10px;
+			left: 50%;
+			margin-left: -40px;
+			width: 80px;
+			border-top: 2px solid $sky-blue;
+		}
+	}
+}
+
+h1 {
+	font-size: 45px;
+	font-style: normal;
+	font-weight: 800;
+	line-height: 50px;
+}
+
+// Example usage of the mixin for future fonts:
+// @include font-face("FontName", "fonts/FontName", 400, normal, eot woff2 woff ttf);

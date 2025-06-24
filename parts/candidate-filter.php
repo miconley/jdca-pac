@@ -6,9 +6,7 @@
  */
 ?>
 
-<aside class="candidate_filter small-12 medium-4 large-4 cell" role="complementary">
-	<h2>Filter Candidates</h2>
-	
+<aside class="candidate_filter small-12 medium-2 large-2" role="complementary">
 	<form id="candidate-filter-form" method="GET" action="<?php echo esc_url(get_post_type_archive_link('candidate')); ?>">
 		<?php
 		// Get all taxonomies for the 'candidate' post type

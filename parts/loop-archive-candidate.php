@@ -13,7 +13,7 @@ $name_override = get_field('name_override', get_the_ID());
 // Get name from title
 $name = explode(" ", get_the_title());
 $first_name = $name[0];
-
+$middle_name = '';
 // If middle name appears, account for it
 if(count($name) > 2) {
 	$middle_name = $name[1];
@@ -47,11 +47,11 @@ if($override = get_field('override_title', get_the_ID())) {
 		<img src="<?php echo $headshot['sizes']['headshot'];?>" alt="<?php echo get_the_title();?>" />
 	</div>
 	<?php if ($region) { ?>
-		<span classname="region"> 
+		<span class="region"> 
 			<?php echo $region;	?>
 		</span>
 	<?php } ?>
-	<div class="name">
+	<div class="title">
 	<?php if ($first_name) { ?>
 		<span> 
 			<?php echo $first_name;	?>
@@ -67,10 +67,10 @@ if($override = get_field('override_title', get_the_ID())) {
 			<?php echo $last_name;	?>
 		</span>
 	<?php } ?>
+	</div>
 	<?php if ($donation_link) { ?>
 		<span> 
-			<a href="<?php echo $donation_link;	?>">Donate</a>
+			<a class="button red" href="<?php echo $donation_link;	?>">Donate</a>
 		</span>
 	<?php } ?>
-	</div>
 </div>

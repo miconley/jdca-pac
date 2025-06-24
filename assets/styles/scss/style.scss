@@ -7,7 +7,7 @@ all of your Sass files so they can compile into one
 CSS file. 
 
 ******************************************************************/
-
+@import "colors";
 // Import local Foundation overrides - Don't link to Bower version as it will be overwritten whenever updated
 @import "settings";
 
@@ -66,3 +66,7 @@ CSS file.
 
 // Import your custom styles
 @import "global";
+@import "fonts";
+@import "ads";
+@import "candidates";
+@import "youtube-overlay";

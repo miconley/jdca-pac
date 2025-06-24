@@ -1,0 +1,139 @@
+/**
+ * YouTube Video Overlay Styles
+ */
+
+.youtube-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+
+    .overlay-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        max-width: calc(100vw - 320px); // 160px padding on each side
+        max-height: calc(100vh - 400px); // 200px padding top and bottom
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        @media screen and (max-width: 768px) {
+            max-width: 100%;
+            max-height: 100%;
+            padding: 20px;
+        }
+
+        @media screen and (min-width: 769px) {
+            max-width: unset;
+            max-height: unset;
+            padding: 2%;
+        }
+    }
+
+    .close-button {
+        position: absolute;
+        top: -5px;
+        right: 0;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 40px;
+        line-height: 1;
+        cursor: pointer;
+        z-index: 10001;
+        padding: 4px;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        &:focus {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            top: 6px;
+            right: -10px;
+            font-size: 40px;
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    .video-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+        @media screen and (min-width: 769px) {
+            // Desktop: Calculate dimensions to fill viewport with padding
+            // width: calc(100vw - 320px);
+            // height: calc((100vw - 320px) * 0.5625); // 16:9 ratio
+            width: unset;
+            aspect-ratio: 16 / 9;
+            
+            // When height is constrained, adjust width to maintain ratio
+            // @supports (min: calc(1px)) {
+            //     height: min(calc((100vw - 320px) * 0.5625), calc(100vh - 400px));
+            //     width: min(calc(100vw - 320px), calc((100vh - 400px) * 1.777));
+            // }
+        }
+
+        @media screen and (max-width: 768px) {
+            // Mobile: 100% width, maintain aspect ratio
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+        }
+    }
+
+    #youtube-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 8px;
+    }
+}
+
+// Prevent body scroll when overlay is open
+body.overlay-open {
+    overflow: hidden;
+}
+
+// Animation for smooth appearance
+.youtube-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    
+    &[style*="flex"] {
+        opacity: 1;
+    }
+}
+
+// Focus styles for accessibility
+.youtube-overlay:focus {
+    outline: none;
+}

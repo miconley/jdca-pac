@@ -51,18 +51,14 @@ if ($has_filters) {
 	<div class="content">
 	
 		<div class="inner-content grid-x grid-margin-x grid-padding-x">
-		
-		    <main class="main small-12 medium-8 large-8 cell" role="main">
-			    
-		    	<header>
-		    		<h1 class="page-title">
-						<?php 
-						the_archive_title();
-						?>
+			<header class="full-width">
+		    		<h1 class="page-title center accent">
+						Our Candidates
 					</h1>
+		    </header>
+		    <main class="main small-12 medium-8 large-8 margin-auto flex" role="main">
+				<div class="small-12 medium-6 large-6 candidates-container">
 
-				
-		    	</header>
 		
 		    	<?php 
 				// Use filtered query if available, otherwise use default
@@ -104,11 +100,10 @@ if ($has_filters) {
 					wp_reset_postdata();
 				}
 				?>
-		
+				</div>
+				<?php get_template_part( 'parts/candidate', 'filter' ); ?>
 			</main> <!-- end #main -->
-	
-			<?php get_template_part( 'parts/candidate', 'filter' ); ?>
-	    
+		    
 	    </div> <!-- end #inner-content -->
 	    
 	</div> <!-- end #content -->

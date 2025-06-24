@@ -16,25 +16,30 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(filterForm);
         const params = new URLSearchParams();
         
-        // Add all checked values to URL params
+        // Group values by taxonomy name (removing [] from form names)
         for (let pair of formData.entries()) {
             const [name, value] = pair;
-            if (params.has(name)) {
+            // Remove [] from the name to get clean taxonomy name
+            const cleanName = name.replace('[]', '');
+            
+            if (params.has(cleanName)) {
                 // If parameter already exists, append to array
-                const existing = params.get(name);
-                params.set(name, existing + ',' + value);
+                const existing = params.get(cleanName);
+                params.set(cleanName, existing + ',' + value);
             } else {
-                params.set(name, value);
+                params.set(cleanName, value);
             }
         }
         
-        // Convert comma-separated values to array format for URL
+        // Build final URL parameters
         const finalParams = new URLSearchParams();
         for (let [key, value] of params.entries()) {
             if (value.includes(',')) {
+                // Multiple values - add as array
                 const values = value.split(',');
                 values.forEach(val => finalParams.append(key + '[]', val));
             } else {
+                // Single value - add as array for consistency
                 finalParams.append(key + '[]', value);
             }
         }
