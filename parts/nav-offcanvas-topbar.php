@@ -9,7 +9,7 @@
 <div class="top-bar" id="top-bar-menu">
 	<div class="top-bar-left float-left">
 		<ul class="menu">
-			<li><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></li>
+			<<li><?php the_custom_logo();?></li>
 		</ul>
 	</div>
 	<div class="top-bar-right show-for-medium">

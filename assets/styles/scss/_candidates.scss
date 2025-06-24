@@ -5,6 +5,30 @@
     gap: 0;
     text-align: center;
 
+    .page-template-page-home & {
+        @media screen and (min-width: 769px) {
+            margin: 0 auto 20px;
+            max-width: 1080px;
+            grid-template-columns: repeat(4, 25%);
+
+            &.can-2 {
+                grid-template-columns: repeat(2, 50%);
+            }
+
+            &.can-3 {
+                grid-template-columns: repeat(4, 33%);
+            }
+
+            &.can-4 {
+                grid-template-columns: repeat(4, 25%);
+            }
+        }
+    }
+
+    .candidates-cta {
+        width: auto;
+    }
+
     .candidate {
         box-shadow: inset 0 0 0 1px $gray;
         margin: 0px -1px -1px 0;
@@ -54,6 +78,10 @@
             letter-spacing: -0.5px;
             margin: 0 0 20px;
             display: block;
+
+            @media screen and (min-width: 769px) {
+                min-height: 96px;
+            }
         }
 
         button,
