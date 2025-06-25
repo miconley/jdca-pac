@@ -70,7 +70,7 @@ if($override = get_field('override_title', get_the_ID())) {
 	</div>
 	<?php if ($donation_link) { ?>
 		<span> 
-			<a class="button red" href="<?php echo $donation_link;	?>">Donate</a>
+			<a class="button red" href="<?php echo $donation_link;	?>" target="_blank">Donate</a>
 		</span>
 	<?php } ?>
 </div>

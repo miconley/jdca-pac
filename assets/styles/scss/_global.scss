@@ -455,7 +455,7 @@ button,
 	font-weight: 800;
 	letter-spacing: 1px;
 	border-radius: 56px;
-	padding: 18px 40px !important;
+	padding: 18px 40px;
 	justify-content: center;
 	align-items: center;
 	text-transform: uppercase;
@@ -537,7 +537,11 @@ button,
 .content {
 	position: relative;
 	width: 100%;
-	margin: 0 auto;
+	margin: 40px auto;
+
+	.page-template-page-home & {
+		margin: 0 auto 40px;
+	}
 }
 
 .center {
@@ -604,7 +608,8 @@ button,
 }
 
 .custom-logo-link {
-
+	width: 186px;
+	
 	@media screen and (min-width: 769px) {
 		width: 280px;
 	}
@@ -616,6 +621,8 @@ button,
 }
 
 .top-bar {
+	height: 80px;
+
 	@media screen and (min-width: 769px) {
 		height: 110px;
 	}

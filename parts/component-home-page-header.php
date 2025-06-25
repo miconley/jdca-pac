@@ -26,7 +26,8 @@ foreach($args as $arg) {
 
 ?>
 
-<div class="home-page-header" style="background-image: url('<?php echo $header_image;?>')">
+<div class="home-page-header">
+    <div class="header-background" style="background-image: url('<?php echo $header_image;?>')"></div>
     <div class="header-content">
 	    <h1 class="accent"><?php echo $headline; ?></h1>
         <span class="subheadline"> <?php echo $subheadline; ?></span>
