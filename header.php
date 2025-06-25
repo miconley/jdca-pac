@@ -52,3 +52,19 @@
 					 <?php get_template_part( 'parts/nav', 'offcanvas-topbar' ); ?>
 	 	
 				</header> <!-- end .header -->
+
+				<!-- Mobile Navigation Menu (outside header) -->
+				<div class="mobile-nav-menu" id="mobile-nav-menu">
+					<div class="mobile-nav-container">
+						<?php 
+						wp_nav_menu(array(
+							'container'			=> false,
+							'menu_id'			=> 'mobile-nav',
+							'menu_class'		=> 'mobile-nav-list',
+							'theme_location'	=> 'main-nav',
+							'depth'				=> 2,
+							'fallback_cb'		=> false,
+						));
+						?>
+					</div>
+				</div>

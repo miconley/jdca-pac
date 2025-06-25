@@ -9,7 +9,7 @@
 <div class="top-bar" id="top-bar-menu">
 	<div class="top-bar-left float-left">
 		<ul class="menu">
-			<<li><?php the_custom_logo();?></li> 
+			<li><?php the_custom_logo();?></li> 
 		</ul>
 	</div>
 	<div class="top-bar-right show-for-medium">
@@ -19,6 +19,9 @@
 		<ul class="menu">
 			<button class="mobile-menu" aria-label="open/close menu">
 				<img src="<?php echo get_template_directory_uri(); ?>/assets/images/menu.svg" />
+			</button>
+			<button class="mobile-nav-close mobile-close-button" aria-label="Close menu">
+				<span>×</span>
 			</button>
 		</ul>
 	</div>
