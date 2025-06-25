@@ -75,4 +75,9 @@
 			<a href="<?php echo esc_url(get_post_type_archive_link('candidate')); ?>" role="button" class="button secondary" id="clear-filters">Clear Filters</a>
 		</div>
 	</form>
+	
+	<!-- Mobile apply button (hidden on desktop) -->
+	<button type="submit" form="candidate-filter-form" class="mobile-apply-button" id="mobile-apply-filters">
+		✓ Save
+	</button>
 </aside>

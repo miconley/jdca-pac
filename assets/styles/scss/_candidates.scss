@@ -284,11 +284,47 @@
             }
         }
     }
+
+    .mobile-apply-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: $sky-blue;
+        color: $white;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        z-index: 150;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        display: none;
+
+        &:hover {
+            background-color: darken($sky-blue, 10%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+    }
+
+    // Show mobile apply button when filter is open
+    &.open .mobile-apply-button {
+        display: block;
+    }
 }
 
 @media screen and (min-width: 769px) {
     .candidate-filter-toggle,
-    .candidate-filter-header {
+    .candidate-filter-header,
+    .mobile-apply-button {
         display: none;
     }
 }

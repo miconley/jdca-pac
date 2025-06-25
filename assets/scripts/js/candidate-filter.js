@@ -11,8 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleButton = document.querySelector('.candidate-filter-toggle');
     const closeButton = document.querySelector('.candidate-filter-header .close');
     const filterAside = document.querySelector('.candidate_filter');
+    const mobileApplyButton = document.getElementById('mobile-apply-filters');
     
     if (!filterForm) return;
+    
+    // Check if we're on mobile
+    function isMobile() {
+        return window.innerWidth < 769;
+    }
     
     // Update URL parameters when checkboxes change
     function updateURL() {
@@ -88,6 +94,12 @@ document.addEventListener('DOMContentLoaded', function() {
             clearButton.style.opacity = hasFilters ? '1' : '0.5';
         }
         
+        // Update mobile apply button state
+        if (mobileApplyButton) {
+            mobileApplyButton.disabled = !hasFilters;
+            mobileApplyButton.innerHTML = '✓ Save';
+        }
+        
         // Add visual indicators to sections with active filters
         document.querySelectorAll('.taxonomy-section').forEach(section => {
             const sectionCheckboxes = section.querySelectorAll('.term-checkbox:checked');
@@ -95,12 +107,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Listen for checkbox changes and auto-apply filters
+    // Listen for checkbox changes
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function() {
             updateFilterState();
-            // Auto-apply filters after a short delay to allow for multiple selections
-            setTimeout(applyFilters, 300);
+            
+            // Only auto-apply on desktop, not mobile
+            if (!isMobile()) {
+                // Auto-apply filters after a short delay to allow for multiple selections
+                setTimeout(applyFilters, 300);
+            }
         });
     });
     
@@ -193,11 +209,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Mobile apply button event listener
+    if (mobileApplyButton) {
+        mobileApplyButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            applyFilters();
+        });
+    }
+    
     // Initialize filter state
     updateFilterState();
     
-    // Prevent form submission since we auto-apply
+    // Handle form submission
     filterForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+        // On mobile, allow form submission, on desktop prevent it
+        if (!isMobile()) {
+            e.preventDefault();
+        } else {
+            // Let mobile form submit normally
+            applyFilters();
+            e.preventDefault(); // Still prevent to use our custom navigation
+        }
     });
 });
