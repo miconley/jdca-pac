@@ -148,18 +148,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Initialize all sections as expanded by default
-    caretButtons.forEach(button => {
-        const section = button.closest('.taxonomy-section');
-        const termsList = section.querySelector('.taxonomy-terms');
-        
-        // Ensure sections start expanded
-        if (button.classList.contains('open')) {
-            termsList.style.maxHeight = 'none';
-            termsList.style.overflow = 'visible';
-            section.classList.remove('collapsed');
-        }
-    });
+    // Initialize sections based on device type
+    function initializeSections() {
+        caretButtons.forEach(button => {
+            const section = button.closest('.taxonomy-section');
+            
+            if (isMobile()) {
+                // On mobile, start collapsed
+                button.classList.remove('open');
+                button.classList.add('closed');
+                section.classList.add('collapsed');
+            } else {
+                // On desktop, start expanded
+                button.classList.add('open');
+                button.classList.remove('closed');
+                section.classList.remove('collapsed');
+            }
+        });
+    }
+    
+    // Initialize sections on page load
+    initializeSections();
     
     // Mobile filter toggle functionality
     function openMobileFilter() {
@@ -219,6 +228,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize filter state
     updateFilterState();
+    
+    // Handle window resize - reinitialize sections if device type changes
+    window.addEventListener('resize', function() {
+        initializeSections();
+    });
     
     // Handle form submission
     filterForm.addEventListener('submit', function(e) {

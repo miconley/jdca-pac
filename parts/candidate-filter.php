@@ -40,7 +40,7 @@
 				?>
 				<div class="taxonomy-section" data-taxonomy="<?php echo esc_attr($taxonomy->name); ?>">
 					<h3 class="taxonomy-title"><?php echo esc_html($taxonomy->labels->name); ?></h3>
-					<button class="caret open" aria-label="open/close filter section">
+					<button class="caret" aria-label="open/close filter section">
 						<img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrow.svg" />
 					</button>
 					<ul class="taxonomy-terms">
