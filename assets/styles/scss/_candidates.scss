@@ -126,6 +126,7 @@
     background-color: $sky-blue;
     border-radius: 50px;
     padding: 0;
+    transition: opacity 0.25s ease-in;
 
     img {
         height: 24px;
@@ -146,6 +147,12 @@
 
     &.open {
         left: 0px;
+        
+        // Hide toggle button when filter is open
+        ~ .candidate-filter-toggle {
+            opacity: 0;
+            pointer-events: none;
+        }
     }
 
     .candidate-filter-header {

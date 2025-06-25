@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearButton = document.getElementById('clear-filters');
     const checkboxes = document.querySelectorAll('.term-checkbox');
     const caretButtons = document.querySelectorAll('.caret');
+    const toggleButton = document.querySelector('.candidate-filter-toggle');
+    const closeButton = document.querySelector('.candidate-filter-header .close');
+    const filterAside = document.querySelector('.candidate_filter');
     
     if (!filterForm) return;
     
@@ -139,6 +142,54 @@ document.addEventListener('DOMContentLoaded', function() {
             termsList.style.maxHeight = 'none';
             termsList.style.overflow = 'visible';
             section.classList.remove('collapsed');
+        }
+    });
+    
+    // Mobile filter toggle functionality
+    function openMobileFilter() {
+        if (filterAside) {
+            filterAside.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Prevent body scroll
+        }
+    }
+    
+    function closeMobileFilter() {
+        if (filterAside) {
+            filterAside.classList.remove('open');
+            document.body.style.overflow = ''; // Restore body scroll
+        }
+    }
+    
+    // Toggle button event listener
+    if (toggleButton) {
+        toggleButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            openMobileFilter();
+        });
+    }
+    
+    // Close button event listener
+    if (closeButton) {
+        closeButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            closeMobileFilter();
+        });
+    }
+    
+    // Close filter when clicking outside on mobile
+    if (filterAside) {
+        filterAside.addEventListener('click', function(e) {
+            // Only close if clicking on the backdrop (the aside itself, not its children)
+            if (e.target === filterAside) {
+                closeMobileFilter();
+            }
+        });
+    }
+    
+    // Close filter on ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && filterAside && filterAside.classList.contains('open')) {
+            closeMobileFilter();
         }
     });
     
