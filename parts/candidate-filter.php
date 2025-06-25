@@ -7,6 +7,10 @@
 ?>
 
 <aside class="candidate_filter small-12 medium-2 large-2" role="complementary">
+	<div class="candidate-filter-header">
+		<span class="text">Filters</span>
+		<button class="close">x</button>
+	</div>
 	<form id="candidate-filter-form" method="GET" action="<?php echo esc_url(get_post_type_archive_link('candidate')); ?>">
 		<?php
 		// Get all taxonomies for the 'candidate' post type

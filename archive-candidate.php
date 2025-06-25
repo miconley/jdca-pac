@@ -102,6 +102,9 @@ if ($has_filters) {
 				?>
 				</div>
 				<?php get_template_part( 'parts/candidate', 'filter' ); ?>
+				<button class="candidate-filter-toggle" aria-label="open/close filter section">
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/images/filters.svg" />
+				</button>
 			</main> <!-- end #main -->
 		    
 	    </div> <!-- end #inner-content -->
