@@ -11,7 +11,7 @@ get_header(); ?>
 	
 		<div class="inner-content grid-x grid-margin-x grid-padding-x">
 		
-		    <main class="main small-12 medium-8 large-8 margin-auto" role="main">
+		    <main class="main small-12 medium-8 large-8 margin-auto ads-wrapper" role="main">
 			    
 		    	<header>
 		    		<h1 class="page-title center accent">Our Ads</h1>

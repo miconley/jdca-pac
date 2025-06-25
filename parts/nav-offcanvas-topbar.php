@@ -17,7 +17,7 @@
 	</div>
 	<div class="top-bar-right float-right show-for-small-only">
 		<ul class="menu">
-			<button class="mobile-menu" data-toggle="off-canvas" class="caret open" aria-label="open/close filter section">
+			<button class="mobile-menu" aria-label="open/close menu">
 				<img src="<?php echo get_template_directory_uri(); ?>/assets/images/menu.svg" />
 			</button>
 		</ul>

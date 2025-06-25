@@ -7,7 +7,7 @@
     @media screen and (min-width: 769px) {
         margin: unset;
         display: grid;
-        grid-template-columns: repeat(3, 360px);
+        grid-template-columns: repeat(3, 33%);
         grid-template-rows: repeat(1, 450px);
 
         .page-template-page-home & {
@@ -66,6 +66,18 @@
             display: block;
             margin: 0 auto;
         }
+    }
+}
+
+@media screen and (min-width:1024px) and (max-width: 1250px) {
+    .ads-wrapper {
+        width: 1200px !important;
+    }
+}
+
+@media print, screen and (min-width: 1400) {
+    .grid-margin-x>.large-8 {
+        width: calc(66.6666666667% - 1.875rem) !important;
     }
 }
 

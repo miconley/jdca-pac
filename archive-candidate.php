@@ -56,7 +56,7 @@ if ($has_filters) {
 						Our Candidates
 					</h1>
 		    </header>
-		    <main class="main small-12 medium-8 large-8 margin-auto flex" role="main">
+		    <main class="main small-12 medium-8 large-8 margin-auto flex candidate-wrapper" role="main">
 				<div class="small-12 medium-6 large-6 candidates-container">
 
 		

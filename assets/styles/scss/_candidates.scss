@@ -184,6 +184,9 @@
         margin-left: 40px;
         top: unset;
         position: relative;
+        left: unset;
+        height: auto;
+        display: block;
     }
 
     .taxonomy-section {
@@ -269,12 +272,13 @@
     .filter-actions {
 
         border: 1px solid $gray;
+        text-align: left;
 
         a {
             background-color: $white;
             color: $red;
             border-radius: 0;
-            width: 100%;
+            width: auto;
             height: 100%;
             margin: 0;
 
@@ -322,12 +326,41 @@
 }
 
 @media screen and (min-width: 769px) {
+    .candidate-fitler {
+        width: 240px;
+    }
+
+    .caret {
+        display: none;
+    }
+
     .candidate-filter-toggle,
     .candidate-filter-header,
     .mobile-apply-button {
         display: none;
     }
+
+    .filter-actions {
+        text-align: center;
+
+        a {
+            width: 100%;
+        }
+    }
 }
+
+@media screen and (min-width:1024px) and (max-width: 1250px) {
+    .candidate-wrapper {
+        width: 1200px !important;
+    }
+}
+
+@media print, screen and (min-width: 1400) {
+    .grid-margin-x>.large-8 {
+        width: calc(66.6666666667% - 1.875rem) !important;
+    }
+}
+
 /*
 <div class="ad">		
 	<div class="image">
