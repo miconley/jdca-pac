@@ -448,6 +448,17 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {
 	margin: 0 auto;
 }
 
+.grid-margin-x>.large-10 {
+	@media screen and (min-width: 769px) {
+		width: 85%;
+	}
+}
+.grid-x>.large-10 {
+	@media screen and (min-width: 769px) {
+		justify-content: center;
+	}
+}
+
 button,
 .button {
 	font-size: 14px;

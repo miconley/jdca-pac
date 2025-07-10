@@ -29,10 +29,19 @@
 			// Skip built-in taxonomies if desired (uncomment the next line)
 			// if (in_array($taxonomy->name, ['category', 'post_tag'])) continue;
 			
-			// Get terms for this taxonomy (only show terms that have content)
+			// Get terms for this taxonomy (only show terms assigned to candidates)
+			$order = ($taxonomy->name === 'state') ? 'ASC' : 'DESC';
 			$terms = get_terms([
 				'taxonomy' => $taxonomy->name,
 				'hide_empty' => true,
+				'orderby' => 'name',
+    			'order' => $order,
+				'object_ids' => get_posts([
+					'post_type' => 'candidate',
+					'fields' => 'ids',
+					'posts_per_page' => -1,
+					'post_status' => 'publish'
+				])
 			]);
 			
 			// Only display if there are terms with content

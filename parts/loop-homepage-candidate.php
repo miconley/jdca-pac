@@ -5,6 +5,7 @@
  * Used for single, index, archive, search.
  */
 $id = $args['candidate']->ID;
+$title = $args['candidate']->post_title;
 $region = get_field('district_region', $id);
 $headshot = get_field('headshot', $id);
 
@@ -12,7 +13,7 @@ $override = get_field('override_title', $id);
 $donation_link = get_field('donation_link', $id);
 $name_override = get_field('name_override', $id);
 // Get name from title
-$name = explode(" ", get_the_title());
+$name = explode(" ", $title);
 $first_name = $name[0];
 $middle_name = '';
 // If middle name appears, account for it
@@ -45,7 +46,7 @@ if($override = get_field('override_title', $id)) {
 	}
 	?>		
 	<div class="headshot">
-		<img src="<?php echo $headshot['sizes']['headshot'];?>" alt="<?php echo get_the_title();?>" />
+		<img src="<?php echo $headshot['sizes']['headshot'];?>" alt="<?php echo $title;?>" />
 	</div>
 	<?php if ($region) { ?>
 		<span class="region"> 
