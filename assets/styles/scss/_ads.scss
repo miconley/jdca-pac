@@ -7,8 +7,8 @@
     @media screen and (min-width: 769px) {
         margin: unset;
         display: grid;
-        grid-template-columns: repeat(3, 33%);
-        grid-template-rows: repeat(1, 450px);
+        grid-template-columns: repeat(2, 33%);
+        justify-content: center;
 
         .page-template-page-home & {
             margin: 0 auto 20px;
@@ -28,12 +28,17 @@
         }
     }
 
+    @media screen and (min-width: 1025px) {
+        grid-template-columns: repeat(auto-fit, 33%);
+    }
+
     .ad {
         box-shadow: inset 0 0 0 1px $medium-blue;
         background-color: $dark-blue;
         color: $white;
         padding: 25px;
         width: 100%;
+        position: relative;
 
         @media screen and (min-width: 769px) {
             padding: 30px;
@@ -58,8 +63,15 @@
             font-weight: 800;
             line-height: 32px;
             letter-spacing: -0.5px;
-            margin: 0 0 20px;
+            margin: 0 0 80px;
             display: block;
+        }
+
+        .button-container {
+            width: 100%;
+            position: absolute;
+            bottom: 30px;
+            left: 0px;
         }
 
         button {
@@ -81,6 +93,13 @@
     }
 }
 
+.election-year-heading {
+    text-align: center;
+}
+
+.year-group {
+    margin-bottom: 40px;
+}
 /*
 <div class="ad">		
 	<div class="image">

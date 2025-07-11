@@ -42,7 +42,8 @@ if ($has_filters) {
 		'paged' => $paged,
 		'tax_query' => $tax_query,
 		'meta_query' => [],
-		'orderby' => 'title',
+		'orderby' => 'meta_value_num title',
+		'meta_key' => 'candidate_sort_order',
 		'order' => 'ASC'
 	]);
 }
@@ -57,7 +58,7 @@ if ($has_filters) {
 					</h1>
 		    </header>
 		    <main class="main small-12 medium-8 large-10 margin-auto flex candidate-wrapper" role="main">
-				<div class="small-12 medium-6 large-6 candidates-container">
+				
 
 		
 		    	<?php 
@@ -65,6 +66,9 @@ if ($has_filters) {
 				$query_to_use = $filtered_query ? $filtered_query : $wp_query;
 				
 				if ($query_to_use->have_posts()) : 
+					?>
+					<div class="small-12 medium-6 large-6 candidates-container">
+					<?php
 					while ($query_to_use->have_posts()) : $query_to_use->the_post(); ?>
 			 
 					<!-- To see additional archive styles, visit the /parts directory -->
@@ -87,11 +91,12 @@ if ($has_filters) {
 						joints_page_navi();
 					}
 					?>
-					
+				</div>
+
 				<?php else : ?>
-											
+					<div class="small-12 medium-12 large-6 candidates-container">				
 					<?php get_template_part( 'parts/content', 'missing' ); ?>
-						
+					</div>
 				<?php endif; ?>
 				
 				<?php 
@@ -100,7 +105,7 @@ if ($has_filters) {
 					wp_reset_postdata();
 				}
 				?>
-				</div>
+				
 				<?php get_template_part( 'parts/candidate', 'filter' ); ?>
 				<button class="candidate-filter-toggle" aria-label="open/close filter section">
 					<img src="<?php echo get_template_directory_uri(); ?>/assets/images/filters.svg" />

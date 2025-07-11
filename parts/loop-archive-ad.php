@@ -15,5 +15,7 @@ $image = get_field('thumbnail', get_the_ID());
 	<span class="title"> 
 		<?php echo get_the_title();	?>
 	</span>
-    <button class="play white" data-url="<?php echo get_field('video_url', get_the_ID());?>">Watch</button>
+	<div class="button-container">
+    	<button class="play white" data-url="<?php echo get_field('video_url', get_the_ID());?>">Watch</button>
+	</div>
 </div>

@@ -104,3 +104,85 @@ function handle_candidate_archive_query($query) {
     }
 }
 add_action('pre_get_posts', 'handle_candidate_archive_query');
+
+// Generate sort order for candidates
+function calculate_candidate_sort_order($post_id) {
+    $election_years = wp_get_post_terms($post_id, 'election_year');
+    $offices = wp_get_post_terms($post_id, 'office');
+    $post_title = get_post_field('post_title', $post_id);
+    
+    // Extract last name from title for sorting
+    $name_parts = explode(' ', trim($post_title));
+    $last_name = end($name_parts);
+    
+    // Default values
+    $year_sort = 9999; // Default for posts without election year
+    $office_sort = 999; // Default for posts without office
+    
+    // Election year sorting (newer years first, so invert)
+    if (!empty($election_years)) {
+        $year = intval($election_years[0]->name);
+        $year_sort = 3000 - $year; // Invert so 2024 becomes smaller number than 2022
+    }
+    
+    // Office sorting: Senate=1, House=2, Governor=3
+    if (!empty($offices)) {
+        $office_name = strtolower($offices[0]->name);
+        if (strpos($office_name, 'senate') !== false) {
+            $office_sort = 1;
+        } elseif (strpos($office_name, 'house') !== false) {
+            $office_sort = 2;
+        } elseif (strpos($office_name, 'governor') !== false) {
+            $office_sort = 3;
+        }
+    }
+    
+    // Create composite sort key: YYYY|O|LastName
+    // Pad numbers with zeros for proper string sorting
+    $sort_order = sprintf('%04d%03d%s', $year_sort, $office_sort, strtolower($last_name));
+    
+    update_post_meta($post_id, 'candidate_sort_order', $sort_order);
+    
+    return $sort_order;
+}
+
+// Update sort order when candidate is saved
+function update_candidate_sort_order($post_id) {
+    if (get_post_type($post_id) !== 'candidate') {
+        return;
+    }
+    
+    // Avoid infinite loops
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    
+    calculate_candidate_sort_order($post_id);
+}
+add_action('save_post', 'update_candidate_sort_order');
+
+// Bulk update all existing candidates
+function bulk_update_candidate_sort_orders() {
+    $candidates = get_posts([
+        'post_type' => 'candidate',
+        'posts_per_page' => -1,
+        'post_status' => 'publish'
+    ]);
+    
+    foreach ($candidates as $candidate) {
+        calculate_candidate_sort_order($candidate->ID);
+    }
+}
+
+// Update main query sorting for candidate archives
+function set_candidate_archive_sort_order($query) {
+    if (!is_admin() && $query->is_main_query() && is_post_type_archive('candidate')) {
+        // Ensure all candidates have sort order calculated
+        bulk_update_candidate_sort_orders();
+        
+        $query->set('meta_key', 'candidate_sort_order');
+        $query->set('orderby', 'meta_value');
+        $query->set('order', 'ASC');
+    }
+}
+add_action('pre_get_posts', 'set_candidate_archive_sort_order', 20);
