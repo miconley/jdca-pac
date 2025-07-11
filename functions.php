@@ -119,10 +119,10 @@ function calculate_candidate_sort_order($post_id) {
     $year_sort = 9999; // Default for posts without election year
     $office_sort = 999; // Default for posts without office
     
-    // Election year sorting (newer years first, so invert)
+    // Election year sorting (older years first, ascending)
     if (!empty($election_years)) {
         $year = intval($election_years[0]->name);
-        $year_sort = 3000 - $year; // Invert so 2024 becomes smaller number than 2022
+        $year_sort = $year; // Use year directly for ascending order
     }
     
     // Office sorting: Senate=1, House=2, Governor=3
