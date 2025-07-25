@@ -14,7 +14,7 @@ get_header(); ?>
 		    <main class="main small-12 medium-12 large-8 margin-auto ads-wrapper" role="main">
 			    
 		    	<header>
-		    		<h1 class="page-title center accent">Our Ads</h1>
+		    		<h1 class="page-title center accent">JDCA PAC Ads</h1>
 		    	</header>
                 
 		    	<?php 
