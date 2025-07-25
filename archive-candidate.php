@@ -36,13 +36,18 @@ foreach ($candidate_taxonomies as $taxonomy) {
 if ($has_filters) {
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 	
+	// Ensure all candidates have sort order calculated before filtering
+	if (function_exists('bulk_update_candidate_sort_orders')) {
+		bulk_update_candidate_sort_orders();
+	}
+	
 	$filtered_query = new WP_Query([
 		'post_type' => 'candidate',
 		'posts_per_page' => get_option('posts_per_page'),
 		'paged' => $paged,
 		'tax_query' => $tax_query,
 		'meta_query' => [],
-		'orderby' => 'meta_value_num title',
+		'orderby' => 'meta_value',
 		'meta_key' => 'candidate_sort_order',
 		'order' => 'ASC'
 	]);
@@ -94,7 +99,7 @@ if ($has_filters) {
 				</div>
 
 				<?php else : ?>
-					<div class="small-12 medium-12 large-6 candidates-container">				
+					<div class="small-12 medium-12 large-6">				
 					<?php get_template_part( 'parts/content', 'missing' ); ?>
 					</div>
 				<?php endif; ?>
